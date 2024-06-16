@@ -25,7 +25,6 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<p>Looking for a specific product or just curious about what's available on Amazon? The Amazon Scraper is the perfect tool for you! This web-based application allows you to search for any product or keyword, and it will return a list of relevant results from Amazon.</p>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
