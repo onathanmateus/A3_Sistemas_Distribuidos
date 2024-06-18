@@ -55,20 +55,20 @@ Vá para o site "https://www.git-scm.com/" e instale o <strong>Git</strong>. <br
 
 ### Instalação
 
-1. Abra o terminal e digite o seguinte comando.
+1. Abra o terminal e digite o seguinte comando. <br> <br>
     ```sh
     cd Desktop 
     ```	
     (Em alguns computadores o diretório da área de trabalho fica em "cd Área de Trabalho" em outros ficará em "cd Desktop") <br> <br>
-2. Clone o repositório
+2. Clone o repositório <br> <br>
     ```sh	
     git clone https://github.com/onathanmateus/A3_Sistemas_Distribuidos.git
     ```
-3. Entre no Repositório
+3. Entre no Repositório <br> <br>
     ```sh	
     cd A3_Sistemas_Distribuidos
     ```
-4. Abra o repósitório com o <strong>Visual Studio Code</strong> (caso você não possua o <strong>Visual Studio Code</strong>, entre nesse site e baixe "https://code.visualstudio.com/")
+4. Abra o repósitório com o <strong>Visual Studio Code</strong> (caso você não possua o <strong>Visual Studio Code</strong>, entre nesse site e baixe "https://code.visualstudio.com/") <br> <br>
     ```sh	
     code .
     ```

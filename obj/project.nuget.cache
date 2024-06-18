@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gYuqJJ9Agn4=",
+  "dgSpecHash": "ocIJ0j9CHbk=",
   "success": true,
-  "projectFilePath": "c:\\Users\\natha\\Desktop\\Repositórios\\A3_Sistemas_Distribuidos\\sistemas-distribuidos-A3.csproj",
+  "projectFilePath": "C:\\Users\\natha\\Desktop\\Repositórios\\A3_Sistemas_Distribuidos\\sistemas-distribuidos-A3.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\natha\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\natha\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",

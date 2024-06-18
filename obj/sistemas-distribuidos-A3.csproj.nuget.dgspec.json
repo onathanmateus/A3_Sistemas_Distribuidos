@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\natha\\Desktop\\Repositórios\\A3_Sistemas_Distribuidos\\sistemas-distribuidos-A3.csproj": {}
+    "C:\\Users\\natha\\Desktop\\Repositórios\\A3_Sistemas_Distribuidos\\sistemas-distribuidos-A3.csproj": {}
   },
   "projects": {
-    "c:\\Users\\natha\\Desktop\\Repositórios\\A3_Sistemas_Distribuidos\\sistemas-distribuidos-A3.csproj": {
+    "C:\\Users\\natha\\Desktop\\Repositórios\\A3_Sistemas_Distribuidos\\sistemas-distribuidos-A3.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\natha\\Desktop\\Repositórios\\A3_Sistemas_Distribuidos\\sistemas-distribuidos-A3.csproj",
+        "projectUniqueName": "C:\\Users\\natha\\Desktop\\Repositórios\\A3_Sistemas_Distribuidos\\sistemas-distribuidos-A3.csproj",
         "projectName": "sistemas-distribuidos-A3",
-        "projectPath": "c:\\Users\\natha\\Desktop\\Repositórios\\A3_Sistemas_Distribuidos\\sistemas-distribuidos-A3.csproj",
+        "projectPath": "C:\\Users\\natha\\Desktop\\Repositórios\\A3_Sistemas_Distribuidos\\sistemas-distribuidos-A3.csproj",
         "packagesPath": "C:\\Users\\natha\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\natha\\Desktop\\Repositórios\\A3_Sistemas_Distribuidos\\obj\\",
+        "outputPath": "C:\\Users\\natha\\Desktop\\Repositórios\\A3_Sistemas_Distribuidos\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\natha\\AppData\\Roaming\\NuGet\\NuGet.Config"
