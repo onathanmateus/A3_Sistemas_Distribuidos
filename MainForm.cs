@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using MongoDB.Bson;
 using sistemas_distribuidos_A3;
 
 namespace sistemas_distribuidos_A3
@@ -76,9 +77,28 @@ namespace sistemas_distribuidos_A3
 
             try
             {
+                // Converte o JSON em um objeto JObject para facilitar a manipulação
+                var dadosMoeda = JsonConvert.DeserializeObject<JObject>(jsonMoeda);
+
+                // Filtra as informações necessárias
+                var dadosFiltrados = new JObject
+                {
+                    ["id"] = dadosMoeda["id"],
+                    ["symbol"] = dadosMoeda["symbol"],
+                    ["name"] = dadosMoeda["name"],
+                    ["current_price"] = dadosMoeda["market_data"]?["current_price"]?["brl"],
+                    ["high_24h"] = dadosMoeda["market_data"]?["high_24h"]?["brl"],
+                    ["low_24h"] = dadosMoeda["market_data"]?["low_24h"]?["brl"],
+                    ["circulating_supply"] = dadosMoeda["market_data"]?["circulating_supply"],
+                    ["max_supply"] = dadosMoeda["market_data"]?["max_supply"]
+                };
+
+                // Converte o JObject filtrado para BsonDocument
+                var bsonDocument = BsonDocument.Parse(dadosFiltrados.ToString());
+
                 // Chama o método Create para salvar no MongoDB
-                var resultado = Program.Create(jsonMoeda);
-                
+                var resultado = Program.Create(bsonDocument);
+
                 if (resultado)
                 {
                     MessageBox.Show("Moeda salva com sucesso no banco de dados.", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -111,7 +131,7 @@ namespace sistemas_distribuidos_A3
             {
                 // Adiciona o ID, s�mbolo e nome da moeda
                 await DigitarLinhaRichTextBox(richTextBox, $"ID: {jObject["id"]}");
-                await DigitarLinhaRichTextBox(richTextBox, $"S�mbolo: {jObject["symbol"]}");
+                await DigitarLinhaRichTextBox(richTextBox, $"Símbolo: {jObject["symbol"]}");
                 await DigitarLinhaRichTextBox(richTextBox, $"Nome: {jObject["name"]}");
 
                 // Adiciona informa��es de mercado
@@ -125,7 +145,7 @@ namespace sistemas_distribuidos_A3
 
                 // Adiciona informa��es de fornecimento
                 await DigitarLinhaRichTextBox(richTextBox, $"Oferta Circulante: {FormatarNumeroInteiro(marketData["circulating_supply"])}");
-                await DigitarLinhaRichTextBox(richTextBox, $"Oferta M�xima: {FormatarNumeroInteiro(marketData["max_supply"])}");
+                await DigitarLinhaRichTextBox(richTextBox, $"Oferta Máxima: {FormatarNumeroInteiro(marketData["max_supply"])}");
 
             }
         }
