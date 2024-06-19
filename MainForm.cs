@@ -57,6 +57,7 @@ namespace sistemas_distribuidos_A3
             }
 
         }
+        
 
         /// <summary>
         /// Evento acionado ao clicar no botão "Salvar".
@@ -119,6 +120,43 @@ namespace sistemas_distribuidos_A3
                 MessageBox.Show($"Erro ao salvar a moeda no banco de dados: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            // Obtém o nome da moeda digitado pelo usuário
+            string dadosMoeda = textBox1.Text.Trim().ToLower();
+
+            if (string.IsNullOrEmpty(dadosMoeda))
+            {
+                MessageBox.Show("Por favor, insira o nome de uma moeda para deletar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                // Chama o método Delete para remover do MongoDB
+                var resultado = Program.Delete(dadosMoeda);
+
+                if (resultado)
+                {
+                    MessageBox.Show("Moeda deletada com sucesso do banco de dados.", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("A moeda não foi encontrada no banco de dados.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                // Limpa o RichTextBox
+                textBox1.Clear();
+
+                // Limpa o local onde foi digitado para pesquisa
+                textBox1.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao deletar a moeda do banco de dados: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
 
         /// <summary>
         /// Adiciona os itens ao RichTextBox com efeito de digita��o.
