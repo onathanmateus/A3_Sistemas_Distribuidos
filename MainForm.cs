@@ -12,7 +12,7 @@ namespace sistemas_distribuidos_A3
         private ServicoMoedasCoinGecko _servicoMoedasCoinGecko;
 
         /// <summary>
-        /// Construtor do formulário principal.
+        /// Construtor do formulï¿½rio principal.
         /// </summary>
         public MainForm()
         {
@@ -21,11 +21,11 @@ namespace sistemas_distribuidos_A3
         }
 
         /// <summary>
-        /// Evento acionado ao clicar no botão "Buscar".
+        /// Evento acionado ao clicar no botï¿½o "Buscar".
         /// </summary>
         private async void btnBuscar_Click(object sender, EventArgs e)
         {
-            // Obtém o nome da moeda digitado pelo usuário
+            // Obtï¿½m o nome da moeda digitado pelo usuï¿½rio
             string nomeMoeda = txtNomeMoeda.Text.Trim().ToLower();
 
             // Verifica se o nome da moeda foi fornecido
@@ -37,28 +37,71 @@ namespace sistemas_distribuidos_A3
 
             try
             {
-                // Obtém o JSON da moeda a partir do serviço CoinGecko
+                // Obtï¿½m o JSON da moeda a partir do serviï¿½o CoinGecko
                 string jsonMoeda = await _servicoMoedasCoinGecko.ObterJsonMoeda(nomeMoeda);
 
-                // Converte o JSON em um objeto JObject para facilitar a manipulação
+                // Converte o JSON em um objeto JObject para facilitar a manipulaï¿½ï¿½o
                 var dadosMoeda = JsonConvert.DeserializeObject<JObject>(jsonMoeda);
 
                 // Limpa o RichTextBox
                 richTextBoxMoedas.Clear();
 
-                // Adiciona os dados filtrados ao RichTextBox com efeito de digitação
+                // Adiciona os dados filtrados ao RichTextBox com efeito de digitaï¿½ï¿½o
                 await AdicionarItensComEfeitoDeDigitacao(richTextBoxMoedas, dadosMoeda);
             }
             catch (Exception ex)
             {
-                // Exibe uma mensagem de erro caso ocorra uma exceção
-                MessageBox.Show($"Ocorreu um erro inesperado ao buscar informações da moeda. Por favor, revise o nome que você inseriu.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Exibe uma mensagem de erro caso ocorra uma exceï¿½ï¿½o
+                MessageBox.Show($"Ocorreu um erro inesperado ao buscar informaï¿½ï¿½es da moeda. Por favor, revise o nome que vocï¿½ inseriu.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
 
         /// <summary>
-        /// Adiciona os itens ao RichTextBox com efeito de digitação.
+        /// Evento acionado ao clicar no botÃ£o "Salvar".
+        /// </summary>
+        private async void btnSalvar_Click(object sender, EventArgs e)
+        {
+            // ObtÃ©m o nome da moeda digitado pelo usuÃ¡rio
+            string nomeMoeda = txtNomeMoeda.Text.Trim().ToLower();
+
+            if (string.IsNullOrEmpty(nomeMoeda))
+            {
+                MessageBox.Show("Por favor, insira o nome de uma moeda.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // ObtÃ©m o JSON da moeda a partir do serviÃ§o "CoinGecko"
+            string jsonMoeda = await _servicoMoedasCoinGecko.ObterJsonMoeda(nomeMoeda);
+
+            try
+            {
+                // Chama o mÃ©todo Create para salvar no MongoDB
+                var resultado = Program.Create(jsonMoeda);
+                
+                if (resultado)
+                {
+                    MessageBox.Show("Moeda salva com sucesso no banco de dados.", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("A moeda jÃ¡ existe no banco de dados.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                // Limpa o RichTextBox
+                richTextBoxMoedas.Clear();
+
+                // Limpa o local onde foi digitado para pesquisa
+                txtNomeMoeda.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao salvar a moeda no banco de dados: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Adiciona os itens ao RichTextBox com efeito de digitaï¿½ï¿½o.
         /// </summary>
         /// <param name="richTextBox">O RichTextBox para adicionar os itens.</param>
         /// <param name="jObject">O JObject contendo os dados da moeda.</param>
@@ -66,12 +109,12 @@ namespace sistemas_distribuidos_A3
         {
             if (jObject != null)
             {
-                // Adiciona o ID, símbolo e nome da moeda
+                // Adiciona o ID, sï¿½mbolo e nome da moeda
                 await DigitarLinhaRichTextBox(richTextBox, $"ID: {jObject["id"]}");
-                await DigitarLinhaRichTextBox(richTextBox, $"Símbolo: {jObject["symbol"]}");
+                await DigitarLinhaRichTextBox(richTextBox, $"Sï¿½mbolo: {jObject["symbol"]}");
                 await DigitarLinhaRichTextBox(richTextBox, $"Nome: {jObject["name"]}");
 
-                // Adiciona informações de mercado
+                // Adiciona informaï¿½ï¿½es de mercado
                 var marketData = jObject["market_data"];
                 if (marketData != null)
                 {
@@ -80,15 +123,15 @@ namespace sistemas_distribuidos_A3
                     await DigitarLinhaRichTextBox(richTextBox, $"Menor valor 24h (BRL): {FormatarValor(marketData["low_24h"]?["brl"])}");
                 }
 
-                // Adiciona informações de fornecimento
+                // Adiciona informaï¿½ï¿½es de fornecimento
                 await DigitarLinhaRichTextBox(richTextBox, $"Oferta Circulante: {FormatarNumeroInteiro(marketData["circulating_supply"])}");
-                await DigitarLinhaRichTextBox(richTextBox, $"Oferta Máxima: {FormatarNumeroInteiro(marketData["max_supply"])}");
+                await DigitarLinhaRichTextBox(richTextBox, $"Oferta Mï¿½xima: {FormatarNumeroInteiro(marketData["max_supply"])}");
 
             }
         }
 
         /// <summary>
-        /// Simula a digitação de uma linha no RichTextBox.
+        /// Simula a digitaï¿½ï¿½o de uma linha no RichTextBox.
         /// </summary>
         /// <param name="richTextBox">O RichTextBox para adicionar a linha.</param>
         /// <param name="linha">A linha a ser adicionada.</param>
@@ -98,13 +141,13 @@ namespace sistemas_distribuidos_A3
             {
                 richTextBox.AppendText(c.ToString());
                 await Task.Delay(10); // Tempo de espera
-                Application.DoEvents(); // Permite a atualização da interface durante o loop
+                Application.DoEvents(); // Permite a atualizaï¿½ï¿½o da interface durante o loop
             }
             richTextBox.AppendText(Environment.NewLine); // Adiciona uma nova linha no final
         }
 
         /// <summary>
-        /// Formata um valor decimal para o formato monetário brasileiro.
+        /// Formata um valor decimal para o formato monetï¿½rio brasileiro.
         /// </summary>
         /// <param name="valor">O valor a ser formatado.</param>
         /// <returns>O valor formatado como string.</returns>
@@ -118,7 +161,7 @@ namespace sistemas_distribuidos_A3
         }
 
         /// <summary>
-        /// Formata um valor decimal como número inteiro com separadores de milhar.
+        /// Formata um valor decimal como nï¿½mero inteiro com separadores de milhar.
         /// </summary>
         /// <param name="valor">O valor a ser formatado.</param>
         /// <returns>O valor formatado como string.</returns>
