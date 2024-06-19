@@ -33,7 +33,7 @@
             btnBuscar = new Button();
             btnSalvar = new Button();
             richTextBoxMoedas = new RichTextBox();
-            button1 = new Button();
+            btnListar = new Button();
             label1 = new Label();
             textBox1 = new TextBox();
             button2 = new Button();
@@ -84,14 +84,15 @@
             richTextBoxMoedas.TabIndex = 6;
             richTextBoxMoedas.Text = "";
             // 
-            // button1
+            // btnListar
             // 
-            button1.Location = new Point(298, 41);
-            button1.Name = "button1";
-            button1.Size = new Size(180, 23);
-            button1.TabIndex = 7;
-            button1.Text = "Exibir Moedas Salvas";
-            button1.UseVisualStyleBackColor = true;
+            btnListar.Location = new Point(298, 41);
+            btnListar.Name = "btnListar";
+            btnListar.Size = new Size(180, 23);
+            btnListar.TabIndex = 7;
+            btnListar.Text = "Exibir Moedas Salvas";
+            btnListar.UseVisualStyleBackColor = true;
+            btnListar.Click += btnListar_Click;
             // 
             // label1
             // 
@@ -136,7 +137,7 @@
             Controls.Add(button2);
             Controls.Add(textBox1);
             Controls.Add(label1);
-            Controls.Add(button1);
+            Controls.Add(btnListar);
             Controls.Add(richTextBoxMoedas);
             Controls.Add(btnSalvar);
             Controls.Add(btnBuscar);
@@ -155,7 +156,7 @@
         private Button btnBuscar;
         private Button btnSalvar;
         private RichTextBox richTextBoxMoedas;
-        private Button button1;
+        private Button btnListar;
         private Label label1;
         private TextBox textBox1;
         private Button button2;

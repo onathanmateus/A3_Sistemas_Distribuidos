@@ -3,7 +3,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using MongoDB.Bson;
 using sistemas_distribuidos_A3;
+using MongoDB.Driver;
 
 namespace sistemas_distribuidos_A3
 {
@@ -12,7 +14,7 @@ namespace sistemas_distribuidos_A3
         private ServicoMoedasCoinGecko _servicoMoedasCoinGecko;
 
         /// <summary>
-        /// Construtor do formul�rio principal.
+        /// Construtor do formulário principal.
         /// </summary>
         public MainForm()
         {
@@ -25,7 +27,7 @@ namespace sistemas_distribuidos_A3
         /// </summary>
         private async void btnBuscar_Click(object sender, EventArgs e)
         {
-            // Obt�m o nome da moeda digitado pelo usu�rio
+            // Obtém o nome da moeda digitado pelo usuário
             string nomeMoeda = txtNomeMoeda.Text.Trim().ToLower();
 
             // Verifica se o nome da moeda foi fornecido
@@ -37,24 +39,36 @@ namespace sistemas_distribuidos_A3
 
             try
             {
-                // Obt�m o JSON da moeda a partir do servi�o CoinGecko
+                // Obtém o JSON da moeda a partir do serviço CoinGecko
                 string jsonMoeda = await _servicoMoedasCoinGecko.ObterJsonMoeda(nomeMoeda);
 
-                // Converte o JSON em um objeto JObject para facilitar a manipula��o
+                // Converte o JSON em um objeto JObject para facilitar a manipulação
                 var dadosMoeda = JsonConvert.DeserializeObject<JObject>(jsonMoeda);
 
                 // Limpa o RichTextBox
                 richTextBoxMoedas.Clear();
 
-                // Adiciona os dados filtrados ao RichTextBox com efeito de digita��o
-                await AdicionarItensComEfeitoDeDigitacao(richTextBoxMoedas, dadosMoeda);
+                // Filtra as informações necessárias
+                var dadosFiltrados = new JObject
+                {
+                    ["id"] = dadosMoeda["id"],
+                    ["symbol"] = dadosMoeda["symbol"],
+                    ["name"] = dadosMoeda["name"],
+                    ["current_price"] = dadosMoeda["market_data"]?["current_price"]?["brl"],
+                    ["high_24h"] = dadosMoeda["market_data"]?["high_24h"]?["brl"],
+                    ["low_24h"] = dadosMoeda["market_data"]?["low_24h"]?["brl"],
+                    ["circulating_supply"] = dadosMoeda["market_data"]?["circulating_supply"],
+                    ["max_supply"] = dadosMoeda["market_data"]?["max_supply"]
+                };
+
+                // Chama o método para adicionar os itens filtrados ao RichTextBox com efeito de digitação
+                await AdicionarItensComEfeitoDeDigitacao(richTextBoxMoedas, dadosFiltrados);
             }
             catch (Exception ex)
             {
-                // Exibe uma mensagem de erro caso ocorra uma exce��o
-                MessageBox.Show($"Ocorreu um erro inesperado ao buscar informa��es da moeda. Por favor, revise o nome que voc� inseriu.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Exibe uma mensagem de erro caso ocorra uma exceção
+                MessageBox.Show($"Ocorreu um erro inesperado ao buscar informações da moeda. Por favor, revise o nome que você inseriu.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         /// <summary>
@@ -76,9 +90,28 @@ namespace sistemas_distribuidos_A3
 
             try
             {
+                // Converte o JSON em um objeto JObject para facilitar a manipulação
+                var dadosMoeda = JsonConvert.DeserializeObject<JObject>(jsonMoeda);
+
+                // Filtra as informações necessárias
+                var dadosFiltrados = new JObject
+                {
+                    ["id"] = dadosMoeda["id"],
+                    ["symbol"] = dadosMoeda["symbol"],
+                    ["name"] = dadosMoeda["name"],
+                    ["current_price"] = dadosMoeda["market_data"]?["current_price"]?["brl"],
+                    ["high_24h"] = dadosMoeda["market_data"]?["high_24h"]?["brl"],
+                    ["low_24h"] = dadosMoeda["market_data"]?["low_24h"]?["brl"],
+                    ["circulating_supply"] = dadosMoeda["market_data"]?["circulating_supply"],
+                    ["max_supply"] = dadosMoeda["market_data"]?["max_supply"]
+                };
+
+                // Converte o JObject filtrado para BsonDocument
+                var bsonDocument = BsonDocument.Parse(dadosFiltrados.ToString());
+
                 // Chama o método Create para salvar no MongoDB
-                var resultado = Program.Create(jsonMoeda);
-                
+                var resultado = Program.Create(bsonDocument);
+
                 if (resultado)
                 {
                     MessageBox.Show("Moeda salva com sucesso no banco de dados.", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -100,6 +133,64 @@ namespace sistemas_distribuidos_A3
             }
         }
 
+        private async void btnListar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Limpa o RichTextBox
+                richTextBoxMoedas.Clear();
+
+                // Busca todas as moedas no banco de dados
+                var moedas = await BuscarTodasMoedasAsync();
+
+                // Adiciona as moedas ao RichTextBox
+                foreach (var moeda in moedas)
+                {
+                    // Converte o BsonDocument em JObject
+                    var jObject = BsonDocumentToJObject(moeda);
+
+                    // Chama o método para adicionar os itens ao RichTextBox com efeito de digitação
+                    await AdicionarItensComEfeitoDeDigitacao(richTextBoxMoedas, jObject);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao listar as moedas do banco de dados: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private JObject BsonDocumentToJObject(BsonDocument document)
+        {
+            // Criar um JObject vazio
+            var jObject = new JObject();
+
+            // Iterar sobre cada elemento no BsonDocument
+            foreach (var element in document.Elements)
+            {
+                // Tratar especificamente o campo _id para convertê-lo em string
+                if (element.Name == "_id")
+                {
+                    jObject.Add(element.Name, element.Value.ToString());
+                }
+                else
+                {
+                    // Converter os outros elementos para JToken
+                    var jToken = JToken.Parse(element.Value.ToJson());
+                    jObject.Add(element.Name, jToken);
+                }
+            }
+
+            return jObject;
+        }
+
+        private async Task<List<BsonDocument>> BuscarTodasMoedasAsync()
+        {
+            var collection = Program.GetDatabase().GetCollection<BsonDocument>("Moedas");
+            var filter = new BsonDocument();
+            var moedas = await collection.Find(filter).ToListAsync();
+            return moedas;
+        }
+
         /// <summary>
         /// Adiciona os itens ao RichTextBox com efeito de digita��o.
         /// </summary>
@@ -109,24 +200,22 @@ namespace sistemas_distribuidos_A3
         {
             if (jObject != null)
             {
-                // Adiciona o ID, s�mbolo e nome da moeda
+                // Adiciona o ID, símbolo e nome da moeda
                 await DigitarLinhaRichTextBox(richTextBox, $"ID: {jObject["id"]}");
                 await DigitarLinhaRichTextBox(richTextBox, $"Símbolo: {jObject["symbol"]}");
                 await DigitarLinhaRichTextBox(richTextBox, $"Nome: {jObject["name"]}");
 
-                // Adiciona informa��es de mercado
-                var marketData = jObject["market_data"];
-                if (marketData != null)
-                {
-                    await DigitarLinhaRichTextBox(richTextBox, $"Valor atual (BRL): {FormatarValor(marketData["current_price"]?["brl"])}");
-                    await DigitarLinhaRichTextBox(richTextBox, $"Maior valor 24h (BRL): {FormatarValor(marketData["high_24h"]?["brl"])}");
-                    await DigitarLinhaRichTextBox(richTextBox, $"Menor valor 24h (BRL): {FormatarValor(marketData["low_24h"]?["brl"])}");
-                }
+                // Adiciona informações de mercado
+                await DigitarLinhaRichTextBox(richTextBox, $"Valor atual (BRL): {FormatarValor(jObject["current_price"])}");
+                await DigitarLinhaRichTextBox(richTextBox, $"Maior valor 24h (BRL): {FormatarValor(jObject["high_24h"])}");
+                await DigitarLinhaRichTextBox(richTextBox, $"Menor valor 24h (BRL): {FormatarValor(jObject["low_24h"])}");
 
-                // Adiciona informa��es de fornecimento
-                await DigitarLinhaRichTextBox(richTextBox, $"Oferta Circulante: {FormatarNumeroInteiro(marketData["circulating_supply"])}");
-                await DigitarLinhaRichTextBox(richTextBox, $"Oferta Máxima: {FormatarNumeroInteiro(marketData["max_supply"])}");
+                // Adiciona informações de fornecimento
+                await DigitarLinhaRichTextBox(richTextBox, $"Oferta Circulante: {FormatarNumeroInteiro(jObject["circulating_supply"])}");
+                await DigitarLinhaRichTextBox(richTextBox, $"Oferta Máxima: {FormatarNumeroInteiro(jObject["max_supply"])}");
 
+                // Adiciona uma quebra de linha adicional ao final dos dados da moeda
+                richTextBox.AppendText(Environment.NewLine);
             }
         }
 

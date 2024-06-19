@@ -51,14 +51,11 @@ static class Program
         }
     }
 
-    public static bool Create(string jsonMoeda)
+    public static bool Create(BsonDocument document)
     {
         try
         {
             var collection = _database.GetCollection<BsonDocument>("Moedas");
-
-            // Converter a string JSON para BsonDocument
-            var document = BsonDocument.Parse(jsonMoeda);
 
             // Verificar se um documento com o mesmo "id" já existe na coleção
             var filter = Builders<BsonDocument>.Filter.Eq("id", document["id"]);
@@ -73,7 +70,7 @@ static class Program
             {
                 // Inserir o documento na coleção
                 collection.InsertOne(document);
-                Console.WriteLine("Moeda inserida com sucesso no banco de dados !");
+                Console.WriteLine("Moeda inserida com sucesso no banco de dados!");
                 return true;
             }
         }
@@ -82,5 +79,9 @@ static class Program
             Console.WriteLine($"Erro ao inserir moeda no banco de dados: {ex}");
             return false;
         }
-}
+    }
+    public static IMongoDatabase GetDatabase()
+    {
+        return _database;
+    }
 }
