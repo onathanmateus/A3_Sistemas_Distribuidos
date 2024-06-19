@@ -74,6 +74,7 @@
             btnSalvar.TabIndex = 4;
             btnSalvar.Text = "Salvar Moeda";
             btnSalvar.UseVisualStyleBackColor = true;
+            btnSalvar.Click += btnSalvar_Click;
             // 
             // richTextBoxMoedas
             // 

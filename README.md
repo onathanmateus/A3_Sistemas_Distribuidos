@@ -3,94 +3,80 @@
 
 <!-- TABLE OF CONTENTS -->
 <details>
-  <summary>Table of Contents</summary>
+  <summary>Sumário</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#about-the-project">Sobre o projeto</a>
       <ul>
-        <li><a href="#built-with">Built With</a></li>
+        <li><a href="#built-with">Construído com</a></li>
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a href="#getting-started">Começando</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#prerequisites">Pré-requisitos</a></li>
+        <li><a href="#installation">Instalação</a></li>
       </ul>
     </li>
-    <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## Sobre o projeto
 
+<p>Este projeto se trata de uma aplicação desktop inovadora que permite aos usuários pesquisar e obter informações detalhadas sobre criptomoedas. Desenvolvido com foco em simplicidade e eficiência, nosso software oferece uma interface intuitiva que torna a navegação e a busca de dados rápida e direta. Com esta ferramenta, tanto investidores experientes quanto novatos podem acessar facilmente informações cruciais para tomar decisões informadas no mercado de criptomoedas.</p>
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">(<a href="#top">Voltar ao topo</a>)</p>
 
-### Built With
+### Construído com
 
-![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white) ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white) ![Javascript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E) ![Node JS](https://img.shields.io/badge/Node%20js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white) ![Express JS](https://img.shields.io/badge/Express%20js-000000?style=for-the-badge&logo=express&logoColor=white) ![Axios](https://img.shields.io/badge/axios-671ddf?&style=for-the-badge&logo=axios&logoColor=white)
+![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=csharp&logoColor=white) ![.NET](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white) 
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">(<a href="#top">Voltar ao topo</a>)</p>
 
 <!-- GETTING STARTED -->
-## Getting Started
+## Começando
 
-If you want to download the project and run it locally, you need to comply with the prerequisites and follow the step-by-step instructions correctly !
+Se quiser baixar o projeto e executá-lo localmente, tem que obedecer os pré-requisitos e seguir corretamente as instruções passo a passo !
 
-### Prerequisites
+### Pré-requisitos
 
-Go to this website "https://nodejs.org/en" and install the Node.js. <br> Then open the terminal and type the following command to check that the installation has been completed.
+Vá para o site "https://dotnet.microsoft.com/pt-br/" e instale o <strong>.NET</strong>. <br> Em seguida, abra o terminal e digite o seguinte comando para verificar se a instalação foi concluída corretamente.
   ```sh
-  node -v
+  dotnet --version
   ```
-(you should see something like this: "v20.10.0") <br> <br> 
+(Você deverá ver algo parecido com: "8.0.303") <br> <br> 
 
-Go to this website "https://git-scm.com/" and install the Git. <br> Then open the terminal and type the following command to check that the installation has been completed.
+Vá para o site "https://www.git-scm.com/" e instale o <strong>Git</strong>. <br> Em seguida, abra o terminal e digite o seguinte comando para verificar se a instalação foi concluída corretamente.
   ```sh
-  git -v
+  git --version
   ```
-(you should see something like this: "git version 2.43.0.windows.1")
+(Você deverá ver algo parecido com: "git version 2.45.2.windows.1")
 
-### Installation
+### Instalação
 
-1. Open the terminal and type the following command.
+1. Abra o terminal e digite o seguinte comando. <br> <br>
     ```sh
-    cd Desktop
+    cd Desktop 
     ```	
-2. Clone the repository 
+    (Em alguns computadores o diretório da área de trabalho fica em "cd Área de Trabalho" em outros ficará em "cd Desktop") <br> <br>
+2. Clone o repositório <br> <br>
     ```sh	
-    git clone https://github.com/onathanmateus/Project-Amazon-Scrapper.git
+    git clone https://github.com/onathanmateus/A3_Sistemas_Distribuidos.git
     ```
-3. Enter the repository
+3. Entre no Repositório <br> <br>
     ```sh	
-    cd Project-Amazon-Scrapper
+    cd A3_Sistemas_Distribuidos
     ```
-4. Open the repository in Visual Studio Code
+4. Abra o repósitório com o <strong>Visual Studio Code</strong> (caso você não possua o <strong>Visual Studio Code</strong>, entre nesse site e baixe "https://code.visualstudio.com/") <br> <br>
     ```sh	
     code .
     ```
-5. Open the terminal within Visual Studio Code and install all the dependencies using the following command
-    ```sh	
-    npm install
-    ```
-6. Use the following command to open the project on localhost
-    ```sh	
-    npm run dev 
-    ```
-If everything went as it should the project will be running on port 3333 on localhost. <br> <br> Open the "index.html" in the browser, add the following characters at the end of the url in the browser "?#", you should see something like this in the url: (file:///C:/Users/natha/Desktop/Project-Amazon-Scrapper/index.html?#) <br> <br> And search for everything !! 
+5. Tenha certeza de ter instalado a seguinte extensão no seu <strong>Visual Studio Code</strong>: "C# Dev Kit" <br> <br>
+6. Em seguida clique na tecla "F5" do seu teclado e espere a aplicação abrir. (Se tudo ocorrer bem a aplicação irá abrir em um formato de janela pequena parecida com a foto a seguir) <br> <br>
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<div align='center'><img src='./Imagens/Preview.jpg'/></div> <br> <br>
 
-<!-- CONTACT -->
-## Contact
+Se tudo ocorrer bem fique a vontade para pesquisar por qualquer criptomoeda e veja a aplicação trazer informações sobre ela !! 
 
-Nathan Mateus de Oliveira Barbosa <br>
-Email: nathanmateudeo@hotmail.com
-
-### Socials
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/onathanmateus) [![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://instagram.com/onathanmateus)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">(<a href="#top">Voltar ao topo</a>)</p>
