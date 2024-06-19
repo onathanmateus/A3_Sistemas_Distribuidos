@@ -84,4 +84,35 @@ static class Program
     {
         return _database;
     }
+
+    public static bool Delete(string dadosMoeda)
+    {
+        try
+        {
+            var collection = _database.GetCollection<BsonDocument>("Moedas");
+
+            // Construir o filtro para encontrar o documento com o nome da moeda especificada
+            var filter = Builders<BsonDocument>.Filter.Eq("id", dadosMoeda);
+
+            // Remover o documento
+            var result = collection.DeleteOne(filter);
+
+            if (result.DeletedCount > 0)
+            {
+                Console.WriteLine("Moeda deletada com sucesso do banco de dados!");
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("A moeda não foi encontrada no banco de dados.");
+                return false;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao deletar moeda do banco de dados: {ex}");
+            return false;
+        }
+    }
+
 }
