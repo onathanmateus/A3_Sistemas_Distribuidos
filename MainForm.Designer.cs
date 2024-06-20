@@ -37,7 +37,7 @@
             label1 = new Label();
             textBox1 = new TextBox();
             button2 = new Button();
-            button3 = new Button();
+            btnDelete = new Button();
             SuspendLayout();
             // 
             // labelMoeda
@@ -121,20 +121,20 @@
             // 
             // button3
             // 
-            button3.Location = new Point(405, 367);
-            button3.Name = "button3";
-            button3.Size = new Size(75, 23);
-            button3.TabIndex = 11;
-            button3.Text = "Excluir";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
+            btnDelete.Location = new Point(405, 367);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(75, 23);
+            btnDelete.TabIndex = 11;
+            btnDelete.Text = "Excluir";
+            btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(490, 394);
-            Controls.Add(button3);
+            Controls.Add(btnDelete);
             Controls.Add(button2);
             Controls.Add(textBox1);
             Controls.Add(label1);
@@ -161,6 +161,6 @@
         private Label label1;
         private TextBox textBox1;
         private Button button2;
-        private Button button3;
+        private Button btnDelete;
     }
 }
