@@ -134,7 +134,7 @@ namespace sistemas_distribuidos_A3
                 MessageBox.Show($"Erro ao salvar a moeda no banco de dados: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void btnExcluir_Click(object sender, EventArgs e)
         {
             // Obtém o nome da moeda digitado pelo usuário
             string dadosMoeda = txtNomeMoeda2.Text.Trim().ToLower();
@@ -258,6 +258,52 @@ namespace sistemas_distribuidos_A3
             }
         }
 
+        private async Task SaveDocumentToDatabase(string id, BsonDocument document)
+        {
+            var collection = Program.GetDatabase().GetCollection<BsonDocument>("Moedas");
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", new ObjectId(id));
+            var update = Builders<BsonDocument>.Update
+                .Set("symbol", document["symbol"])
+                .Set("name", document["name"])
+                .Set("current_price", document["current_price"])
+                .Set("high_24h", document["high_24h"])
+                .Set("low_24h", document["low_24h"])
+                .Set("circulating_supply", document["circulating_supply"])
+                .Set("max_supply", document["max_supply"]);
+
+            await collection.UpdateOneAsync(filter, update);
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            TextBox txtNomeMoeda2 = this.Controls["txtNomeMoeda2"] as TextBox;
+
+            if (txtNomeMoeda2 != null)
+            {
+                string nomeMoeda = txtNomeMoeda2.Text;
+
+                // Buscar o ID da moeda pelo nome
+                var collection = Program.GetDatabase().GetCollection<BsonDocument>("Moedas");
+                var filter = Builders<BsonDocument>.Filter.Eq("name", nomeMoeda);
+                var moeda = collection.Find(filter).FirstOrDefault();
+
+                if (moeda != null)
+                {
+                    string idMoeda = moeda["_id"].ToString();
+
+                    // Cria uma nova instância de FormEditar e passa o ID e nome da moeda
+                    FormEditar formEditar = new FormEditar(idMoeda, nomeMoeda);
+
+                    // Abre a nova instância
+                    formEditar.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Moeda não encontrada no banco de dados.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
         /// <summary>
         /// Simula a digita��o de uma linha no RichTextBox.
         /// </summary>
@@ -269,7 +315,6 @@ namespace sistemas_distribuidos_A3
             {
                 richTextBox.AppendText(c.ToString());
                 await Task.Delay(10); // Tempo de espera em milisegundos.
-                Application.DoEvents(); // Permite a atualiza��o da interface durante o loop
             }
             richTextBox.AppendText(Environment.NewLine); // Adiciona uma nova linha no final
         }
@@ -302,36 +347,5 @@ namespace sistemas_distribuidos_A3
             return valorDecimal.ToString("#,##0", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"));
         }
 
-        private async Task SaveDocumentToDatabase(string id, BsonDocument document)
-        {
-            var collection = Program.GetDatabase().GetCollection<BsonDocument>("Moedas");
-            var filter = Builders<BsonDocument>.Filter.Eq("_id", new ObjectId(id));
-            var update = Builders<BsonDocument>.Update
-                .Set("symbol", document["symbol"])
-                .Set("name", document["name"])
-                .Set("current_price", document["current_price"])
-                .Set("high_24h", document["high_24h"])
-                .Set("low_24h", document["low_24h"])
-                .Set("circulating_supply", document["circulating_supply"])
-                .Set("max_supply", document["max_supply"]);
-
-            await collection.UpdateOneAsync(filter, update);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            TextBox textBox1 = this.Controls["textBox1"] as TextBox;
-
-            if (textBox1 != null)
-            {
-                // Cria uma nova instância de Form1 e passa o texto do TextBox
-                FormEditar form1 = new FormEditar(textBox1.Text);
-
-                // Abre a nova instânciaS
-                form1.Show();
-
-            }
-
-        }        
     }
 }

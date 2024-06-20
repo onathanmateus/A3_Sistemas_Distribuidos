@@ -1540,24 +1540,31 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\natha\\.nuget\\packages\\": {}
+    "C:\\Users\\55849\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\natha\\Desktop\\Repositórios\\A3_Sistemas_Distribuidos\\sistemas-distribuidos-A3.csproj",
+      "projectUniqueName": "C:\\Users\\55849\\Documents\\Faculdade\\Sistemas Distribuidos\\sistemas-distribuidos-A3\\sistemas-distribuidos-A3\\sistemas-distribuidos-A3.csproj",
       "projectName": "sistemas-distribuidos-A3",
-      "projectPath": "C:\\Users\\natha\\Desktop\\Repositórios\\A3_Sistemas_Distribuidos\\sistemas-distribuidos-A3.csproj",
-      "packagesPath": "C:\\Users\\natha\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\natha\\Desktop\\Repositórios\\A3_Sistemas_Distribuidos\\obj\\",
+      "projectPath": "C:\\Users\\55849\\Documents\\Faculdade\\Sistemas Distribuidos\\sistemas-distribuidos-A3\\sistemas-distribuidos-A3\\sistemas-distribuidos-A3.csproj",
+      "packagesPath": "C:\\Users\\55849\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\55849\\Documents\\Faculdade\\Sistemas Distribuidos\\sistemas-distribuidos-A3\\sistemas-distribuidos-A3\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\natha\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\55849\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0-windows"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1625,7 +1632,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.301/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

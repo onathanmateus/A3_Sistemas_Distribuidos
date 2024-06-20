@@ -52,6 +52,7 @@
             btnSalvarAlteracao.TabIndex = 1;
             btnSalvarAlteracao.Text = "Salvar Alterações";
             btnSalvarAlteracao.UseVisualStyleBackColor = true;
+            btnSalvarAlteracao.Click += btnSalvarAlteracao_Click;
             // 
             // txtNomeAtual
             // 
