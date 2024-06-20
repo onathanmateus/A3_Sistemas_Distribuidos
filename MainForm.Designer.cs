@@ -35,9 +35,9 @@
             richTextBoxMoedas = new RichTextBox();
             btnListar = new Button();
             label1 = new Label();
-            textBox1 = new TextBox();
-            button2 = new Button();
-            button3 = new Button();
+            txtNomeMoeda2 = new TextBox();
+            btnExcluir = new Button();
+            btnEditar = new Button();
             SuspendLayout();
             // 
             // labelMoeda
@@ -99,44 +99,45 @@
             label1.AutoSize = true;
             label1.Location = new Point(12, 341);
             label1.Name = "label1";
-            label1.Size = new Size(306, 15);
+            label1.Size = new Size(309, 15);
             label1.TabIndex = 8;
-            label1.Text = "Digite o nome da moeda que deseja modificar ou excluir";
+            label1.Text = "Digite o nome da moeda que deseja modificar ou excluir:";
             // 
-            // textBox1
+            // txtNomeMoeda2
             // 
-            textBox1.Location = new Point(324, 338);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(154, 23);
-            textBox1.TabIndex = 9;
+            txtNomeMoeda2.Location = new Point(327, 338);
+            txtNomeMoeda2.Name = "txtNomeMoeda2";
+            txtNomeMoeda2.Size = new Size(151, 23);
+            txtNomeMoeda2.TabIndex = 9;
             // 
-            // button2
+            // btnExcluir
             // 
-            button2.Location = new Point(324, 367);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 10;
-            button2.Text = "Editar";
-            button2.UseVisualStyleBackColor = true;
+            btnExcluir.Location = new Point(403, 367);
+            btnExcluir.Name = "btnExcluir";
+            btnExcluir.Size = new Size(75, 23);
+            btnExcluir.TabIndex = 11;
+            btnExcluir.Text = "Excluir";
+            btnExcluir.UseVisualStyleBackColor = true;
+            btnExcluir.Click += button3_Click;
             // 
-            // button3
+            // btnEditar
             // 
-            button3.Location = new Point(405, 367);
-            button3.Name = "button3";
-            button3.Size = new Size(75, 23);
-            button3.TabIndex = 11;
-            button3.Text = "Excluir";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
+            btnEditar.Location = new Point(327, 367);
+            btnEditar.Name = "btnEditar";
+            btnEditar.Size = new Size(75, 23);
+            btnEditar.TabIndex = 14;
+            btnEditar.Text = "Editar";
+            btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += button1_Click;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(490, 394);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(textBox1);
+            ClientSize = new Size(490, 402);
+            Controls.Add(btnEditar);
+            Controls.Add(btnExcluir);
+            Controls.Add(txtNomeMoeda2);
             Controls.Add(label1);
             Controls.Add(btnListar);
             Controls.Add(richTextBoxMoedas);
@@ -144,7 +145,10 @@
             Controls.Add(btnBuscar);
             Controls.Add(txtNomeMoeda);
             Controls.Add(labelMoeda);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "MainForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "BuscaCoin";
             ResumeLayout(false);
             PerformLayout();
@@ -159,8 +163,8 @@
         private RichTextBox richTextBoxMoedas;
         private Button btnListar;
         private Label label1;
-        private TextBox textBox1;
-        private Button button2;
-        private Button button3;
+        private TextBox txtNomeMoeda2;
+        private Button btnExcluir;
+        private Button btnEditar;
     }
 }

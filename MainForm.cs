@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using MongoDB.Bson;
 using sistemas_distribuidos_A3;
 using MongoDB.Driver;
+using System.Globalization;
 
 namespace sistemas_distribuidos_A3
 {
@@ -70,7 +71,7 @@ namespace sistemas_distribuidos_A3
                 MessageBox.Show($"Ocorreu um erro inesperado ao buscar informações da moeda. Por favor, revise o nome que você inseriu.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+
 
         /// <summary>
         /// Evento acionado ao clicar no botão "Salvar".
@@ -136,7 +137,7 @@ namespace sistemas_distribuidos_A3
         private void button3_Click(object sender, EventArgs e)
         {
             // Obtém o nome da moeda digitado pelo usuário
-            string dadosMoeda = textBox1.Text.Trim().ToLower();
+            string dadosMoeda = txtNomeMoeda2.Text.Trim().ToLower();
 
             if (string.IsNullOrEmpty(dadosMoeda))
             {
@@ -159,10 +160,10 @@ namespace sistemas_distribuidos_A3
                 }
 
                 // Limpa o RichTextBox
-                textBox1.Clear();
+                txtNomeMoeda2.Clear();
 
                 // Limpa o local onde foi digitado para pesquisa
-                textBox1.Clear();
+                txtNomeMoeda2.Clear();
             }
             catch (Exception ex)
             {
@@ -267,7 +268,7 @@ namespace sistemas_distribuidos_A3
             foreach (char c in linha)
             {
                 richTextBox.AppendText(c.ToString());
-                await Task.Delay(1); // Tempo de espera
+                await Task.Delay(10); // Tempo de espera em milisegundos.
                 Application.DoEvents(); // Permite a atualiza��o da interface durante o loop
             }
             richTextBox.AppendText(Environment.NewLine); // Adiciona uma nova linha no final
@@ -300,5 +301,37 @@ namespace sistemas_distribuidos_A3
             }
             return valorDecimal.ToString("#,##0", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"));
         }
+
+        private async Task SaveDocumentToDatabase(string id, BsonDocument document)
+        {
+            var collection = Program.GetDatabase().GetCollection<BsonDocument>("Moedas");
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", new ObjectId(id));
+            var update = Builders<BsonDocument>.Update
+                .Set("symbol", document["symbol"])
+                .Set("name", document["name"])
+                .Set("current_price", document["current_price"])
+                .Set("high_24h", document["high_24h"])
+                .Set("low_24h", document["low_24h"])
+                .Set("circulating_supply", document["circulating_supply"])
+                .Set("max_supply", document["max_supply"]);
+
+            await collection.UpdateOneAsync(filter, update);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            TextBox textBox1 = this.Controls["textBox1"] as TextBox;
+
+            if (textBox1 != null)
+            {
+                // Cria uma nova instância de Form1 e passa o texto do TextBox
+                FormEditar form1 = new FormEditar(textBox1.Text);
+
+                // Abre a nova instânciaS
+                form1.Show();
+
+            }
+
+        }        
     }
 }

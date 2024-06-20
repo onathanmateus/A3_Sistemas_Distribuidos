@@ -142,3 +142,4 @@ c:\Users\55849\Documents\Faculdade\Sistemas Distribuidos\sistemas-distribuidos-A
 c:\Users\55849\Documents\Faculdade\Sistemas Distribuidos\sistemas-distribuidos-A3\sistemas-distribuidos-A3\bin\Debug\net8.0-windows\runtimes\osx\native\libmongocrypt.dylib
 c:\Users\55849\Documents\Faculdade\Sistemas Distribuidos\sistemas-distribuidos-A3\sistemas-distribuidos-A3\bin\Debug\net8.0-windows\runtimes\win\native\mongocrypt.dll
 c:\Users\55849\Documents\Faculdade\Sistemas Distribuidos\sistemas-distribuidos-A3\sistemas-distribuidos-A3\obj\Debug\net8.0-windows\sistemas-distribuidos-A3.sourcelink.json
+C:\Users\55849\Documents\Faculdade\Sistemas Distribuidos\sistemas-distribuidos-A3\sistemas-distribuidos-A3\obj\Debug\net8.0-windows\sistemas_distribuidos_A3.FormEditar.resources
