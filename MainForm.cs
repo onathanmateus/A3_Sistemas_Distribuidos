@@ -134,7 +134,7 @@ namespace sistemas_distribuidos_A3
                 MessageBox.Show($"Erro ao salvar a moeda no banco de dados: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void button3_Click(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
             // Obtém o nome da moeda digitado pelo usuário
             string dadosMoeda = txtNomeMoeda2.Text.Trim().ToLower();

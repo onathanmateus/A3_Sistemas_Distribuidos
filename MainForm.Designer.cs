@@ -35,9 +35,15 @@
             richTextBoxMoedas = new RichTextBox();
             btnListar = new Button();
             label1 = new Label();
+<<<<<<< HEAD
             txtNomeMoeda2 = new TextBox();
             btnExcluir = new Button();
             btnEditar = new Button();
+=======
+            textBox1 = new TextBox();
+            button2 = new Button();
+            btnDelete = new Button();
+>>>>>>> 63ea7ed5ca7cc871df87791cf98eefd3afe2e850
             SuspendLayout();
             // 
             // labelMoeda
@@ -122,6 +128,7 @@
             // 
             // btnEditar
             // 
+<<<<<<< HEAD
             btnEditar.Location = new Point(327, 367);
             btnEditar.Name = "btnEditar";
             btnEditar.Size = new Size(75, 23);
@@ -129,15 +136,31 @@
             btnEditar.Text = "Editar";
             btnEditar.UseVisualStyleBackColor = true;
             btnEditar.Click += button1_Click;
+=======
+            btnDelete.Location = new Point(405, 367);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(75, 23);
+            btnDelete.TabIndex = 11;
+            btnDelete.Text = "Excluir";
+            btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
+>>>>>>> 63ea7ed5ca7cc871df87791cf98eefd3afe2e850
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+<<<<<<< HEAD
             ClientSize = new Size(490, 402);
             Controls.Add(btnEditar);
             Controls.Add(btnExcluir);
             Controls.Add(txtNomeMoeda2);
+=======
+            ClientSize = new Size(490, 394);
+            Controls.Add(btnDelete);
+            Controls.Add(button2);
+            Controls.Add(textBox1);
+>>>>>>> 63ea7ed5ca7cc871df87791cf98eefd3afe2e850
             Controls.Add(label1);
             Controls.Add(btnListar);
             Controls.Add(richTextBoxMoedas);
@@ -163,8 +186,14 @@
         private RichTextBox richTextBoxMoedas;
         private Button btnListar;
         private Label label1;
+<<<<<<< HEAD
         private TextBox txtNomeMoeda2;
         private Button btnExcluir;
         private Button btnEditar;
+=======
+        private TextBox textBox1;
+        private Button button2;
+        private Button btnDelete;
+>>>>>>> 63ea7ed5ca7cc871df87791cf98eefd3afe2e850
     }
 }
