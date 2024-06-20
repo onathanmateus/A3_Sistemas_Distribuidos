@@ -55,16 +55,16 @@ Vá para o site "https://www.git-scm.com/" e instale o <strong>Git</strong>. <br
 
 ### Instalação
 
-1. Abra o terminal e digite o seguinte comando. <br> <br>
+1. Acesse a diretório onde desejar salvar o projeto através do terminal. <br> <br>
+    *Exemplo:*
     ```sh
     cd Desktop 
     ```	
-    (Em alguns computadores o diretório da área de trabalho fica em "cd Área de Trabalho" em outros ficará em "cd Desktop") <br> <br>
-2. Clone o repositório <br> <br>
+2. Clone o repositório usando o comando: <br> <br>
     ```sh	
     git clone https://github.com/onathanmateus/A3_Sistemas_Distribuidos.git
     ```
-3. Entre no Repositório <br> <br>
+3. Acesse o repositório usando <br> <br>
     ```sh	
     cd A3_Sistemas_Distribuidos
     ```

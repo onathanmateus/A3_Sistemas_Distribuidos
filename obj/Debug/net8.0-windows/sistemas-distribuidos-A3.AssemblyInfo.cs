@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("sistemas-distribuidos-A3")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+27ec548f10c4e56d639631584e7d0e219b127012")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+648653a45ceedd36a8800b13beac3d354989bc8f")]
 [assembly: System.Reflection.AssemblyProductAttribute("sistemas-distribuidos-A3")]
 [assembly: System.Reflection.AssemblyTitleAttribute("sistemas-distribuidos-A3")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
